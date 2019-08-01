@@ -90,10 +90,13 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
   function onMove({ delta }: StateType) {
     const scale = scaleClamp(getScale(Math.abs(delta[1])));
 
+    // we use this to alter the y-position to ensure the image
+    // scales under our cursor / pointer
+    const diffHeight = ((1 - scale) * cloneRef.current!.height) / 2;
+
     set({
-      transform: `translateX(${delta[0] * 0.8}px) translateY(${
-        delta[1]
-      }px) scale(${scale})`,
+      transform: `translateX(${delta[0] * 0.8}px) translateY(${delta[1] -
+        diffHeight}px) scale(${scale})`,
       immediate: true
     });
 
@@ -258,6 +261,7 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
             className="EnlargedImage__Image"
             src={src}
             style={{
+              cursor: "zoom-in",
               maxWidth: "100%",
               height: "auto",
               opacity: thumbProps.opacity,
@@ -282,7 +286,8 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
             left: 0,
             bottom: 0,
             right: 0,
-            zIndex: 90
+            zIndex: 90,
+            cursor: "zoom-out"
           }}
         >
           <animated.div
