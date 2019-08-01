@@ -12,11 +12,9 @@ interface PositionType {
 }
 
 export interface ImageEnlargerProps extends React.HTMLAttributes<any> {
-  fadeIn?: boolean;
-  zoomed?: boolean;
-  caption?: string;
+  zoomed: boolean;
   onClick: () => void;
-  fullscreenSrc?: string;
+  enlargedSrc?: string;
   renderLoading?: React.ReactNode;
   onRequestClose?: () => void;
   src: string;
@@ -32,12 +30,11 @@ const scaleClamp = clamp(0.4, 1);
  */
 
 const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
-  fadeIn,
   zoomed = false,
-  caption,
   renderLoading,
-  fullscreenSrc,
+  enlargedSrc,
   onRequestClose,
+  style = {},
   src,
   ...other
 }) => {
@@ -252,69 +249,76 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
 
   return (
     <React.Fragment>
-      <div className="Image">
-        <div style={{ position: "relative" }}>
+      <div className="EnlargedImage">
+        <div
+          className="EnlargedImage__container"
+          style={{ position: "relative", display: "inline-block" }}
+        >
           <animated.img
+            className="EnlargedImage__Image"
             src={src}
             style={{
               maxWidth: "100%",
               height: "auto",
-              opacity: thumbProps.opacity
+              opacity: thumbProps.opacity,
+              ...style
             }}
             ref={ref}
             {...other}
           />
-          {renderLoading}
+          {!cloneLoaded && zoomed && renderLoading}
         </div>
       </div>
-      {hasRequestedZoom ||
-        (src !== fullscreenSrc && (
-          <div
-            {...bind}
-            aria-hidden={!zoomed}
-            onClick={onRequestClose}
+      {hasRequestedZoom && (
+        <div
+          className="EnlargedImage__enlarged-container"
+          {...bind}
+          aria-hidden={!zoomed}
+          onClick={onRequestClose}
+          style={{
+            pointerEvents: zoomed ? "auto" : "none",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            zIndex: 90
+          }}
+        >
+          <animated.div
+            className="EnlargedImage__overlay"
             style={{
-              pointerEvents: zoomed ? "auto" : "none",
-              position: "fixed",
+              opacity: overlay.opacity,
+              position: "absolute",
               top: 0,
               left: 0,
-              bottom: 0,
               right: 0,
-              zIndex: 90
+              bottom: 0,
+              background: "rgba(255,255,255,0.8)"
             }}
-          >
-            <animated.div
-              style={{
-                opacity: overlay.opacity,
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: "black"
-              }}
-            />
+          />
 
-            <animated.img
-              onLoad={() => {
-                setCloneLoaded(true);
-              }}
-              style={{
-                pointerEvents: "none",
-                zIndex: 100,
-                position: "absolute",
-                opacity: props.opacity,
-                transform: props.transform,
-                left: props.left,
-                top: props.top,
-                width: props.width,
-                height: props.height
-              }}
-              ref={cloneRef}
-              src={fullscreenSrc || src}
-            />
-          </div>
-        ))}
+          <animated.img
+            className="EnlargedImage__clone"
+            onLoad={() => {
+              setCloneLoaded(true);
+            }}
+            style={{
+              pointerEvents: "none",
+              zIndex: 100,
+              position: "absolute",
+              opacity: props.opacity,
+              transform: props.transform,
+              left: props.left,
+              top: props.top,
+              width: props.width,
+              height: props.height
+            }}
+            ref={cloneRef}
+            src={enlargedSrc || src}
+          />
+        </div>
+      )}
     </React.Fragment>
   );
 };
