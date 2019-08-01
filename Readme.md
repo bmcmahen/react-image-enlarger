@@ -3,7 +3,7 @@
 [![npm package](https://img.shields.io/npm/v/react-image-enlarger/latest.svg)](https://www.npmjs.com/package/react-image-enlarger)
 [![Follow on Twitter](https://img.shields.io/twitter/follow/benmcmahen.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=benmcmahen)
 
-A medium.com style image zoom component with gesture dismissal similar to that found in the iOS Photos app. Originally built for use in [Sancho-UI](https://github.com/bmcmahen/sancho).
+A medium.com style image zoom component with gesture dismissal similar to that found in the iOS Photos app. Originally built for use in [Sancho-UI](https://github.com/bmcmahen/sancho). Try the [demo here](https://codesandbox.io/embed/adoring-sun-dz5yj).
 
 ## Features
 
