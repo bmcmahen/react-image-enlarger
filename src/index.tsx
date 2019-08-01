@@ -16,7 +16,7 @@ export interface ImageEnlargerProps extends React.HTMLAttributes<any> {
   onClick: () => void;
   enlargedSrc?: string;
   renderLoading?: React.ReactNode;
-  onRequestClose?: () => void;
+  onRequestClose: () => void;
   src: string;
 }
 
