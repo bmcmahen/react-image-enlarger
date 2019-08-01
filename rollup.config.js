@@ -6,7 +6,7 @@ import cleanup from "rollup-plugin-cleanup";
 import json from "rollup-plugin-json";
 import typescript from "rollup-plugin-typescript2";
 
-const input = "src/index.ts";
+const input = "src/index.tsx";
 
 const plugins = [
   resolve(),
