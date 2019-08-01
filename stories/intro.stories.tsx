@@ -60,6 +60,11 @@ function LoadingIndicator() {
 }
 
 storiesOf("Hello", module)
-  .add("Single src", () => <SingleSource />)
+  .add("Single src", () => (
+    <>
+      <SingleSource />
+      <SingleSource />
+    </>
+  ))
   .add("Double source", () => <DoubleSource />)
   .add("Loading indicator", () => <LoadingIndicator />);

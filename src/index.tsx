@@ -94,9 +94,13 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
     // scales under our cursor / pointer
     const diffHeight = ((1 - scale) * cloneRef.current!.height) / 2;
 
+    console.log(delta[1]);
+
+    const ty = delta[1] - diffHeight * (delta[1] > 0 ? 1 : -1);
+
     set({
-      transform: `translateX(${delta[0] * 0.8}px) translateY(${delta[1] -
-        diffHeight}px) scale(${scale})`,
+      transform: `translateX(${delta[0] *
+        0.8}px) translateY(${ty}px) scale(${scale})`,
       immediate: true
     });
 
