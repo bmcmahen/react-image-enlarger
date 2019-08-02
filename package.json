@@ -1,6 +1,6 @@
 {
   "name": "react-image-enlarger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A medium.com style image zoom component with gesture dismissal",
   "main": "cjs/index.js",
   "module": "esm/index.js",
