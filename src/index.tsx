@@ -93,9 +93,6 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
     // we use this to alter the y-position to ensure the image
     // scales under our cursor / pointer
     const diffHeight = ((1 - scale) * cloneRef.current!.height) / 2;
-
-    console.log(delta[1]);
-
     const ty = delta[1] - diffHeight * (delta[1] > 0 ? 1 : -1);
 
     set({
