@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import Image from "../src";
 
-function SingleSource() {
+function SingleSource({ ...other }) {
   const [zoomed, setZoomed] = React.useState(false);
 
   return (
@@ -12,6 +12,7 @@ function SingleSource() {
       src="https://images.unsplash.com/photo-1542049943447-072b93eb20af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80"
       onClick={() => setZoomed(true)}
       onRequestClose={() => setZoomed(false)}
+      {...other}
     />
   );
 }
@@ -67,4 +68,5 @@ storiesOf("Hello", module)
     </>
   ))
   .add("Double source", () => <DoubleSource />)
-  .add("Loading indicator", () => <LoadingIndicator />);
+  .add("Loading indicator", () => <LoadingIndicator />)
+  .add("Custom background", () => <SingleSource overlayColor="black" />);

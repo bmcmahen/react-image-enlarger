@@ -15,6 +15,7 @@ export interface ImageEnlargerProps extends React.HTMLAttributes<any> {
   zoomed: boolean;
   onClick: () => void;
   enlargedSrc?: string;
+  overlayColor?: string;
   renderLoading?: React.ReactNode;
   onRequestClose: () => void;
   src: string;
@@ -32,6 +33,7 @@ const scaleClamp = clamp(0.4, 1);
 const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
   zoomed = false,
   renderLoading,
+  overlayColor = "rgba(255,255,255,0.8)",
   enlargedSrc,
   onRequestClose,
   style = {},
@@ -300,7 +302,7 @@ const ImageEnlarger: React.FunctionComponent<ImageEnlargerProps> = ({
               left: 0,
               right: 0,
               bottom: 0,
-              background: "rgba(255,255,255,0.8)"
+              backgroundColor: overlayColor
             }}
           />
 

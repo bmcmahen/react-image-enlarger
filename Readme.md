@@ -52,6 +52,7 @@ Any additional props beyond the ones listed below are passed to the thumbnail im
 | renderLoading    | React.ReactNode |               | Render a loading indicator                                 |
 | src\*            | String          |               | The thumbnail image source (and enlarged, if not provided) |
 | enlargedSrc      | String          |               | An optional larger image source                            |
+| overlayColor     | String          |               | Customize the background color of the overlay              |
 
 ## License
 
